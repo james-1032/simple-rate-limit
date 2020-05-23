@@ -6,7 +6,7 @@ Simple rate limiter for JavaScript functions
 
 ## Usage
 
-### debounce(id, timeout)
+### limit(rateLimitID, timeout)
 
 Will return `false` if function is being called before the timeout from the previous call has expired. If a debounce does not already exist, one will be created and activated on the first call.
 
@@ -15,69 +15,69 @@ Example: <i>Button action only runs once every 1000ms, no matter how many times 
 ```js
 
 button.addEventListener('click', e => {
-			if (debounce('myid', 1000)) {
+			if (rateLimitID('myid', 1000)) {
 				// Button Action
 			}
 		}
 
 ```
 
-Example: <i>The secret will only be returned once every 5000ms.</i>
+Example: <i>A user can only access the secret once every 5000ms.</i>
 
 ```js
 
-function getSecret {
-	return (debounce('getsecret', 5000)) ? secretValue : null;
+function getSecret(requestingUserID) {
+	return (limit(requestingUserID, 5000)) ? secretValue : null;
 }
 
 ```
 ## 
 
-> The following methods achieve the same result as `debounce()` but are split to allow more manual control.
+> The following methods achieve the same result as `limit()` but are split to allow more manual control.
 
-### setDebounce(id, state)
+### setState(rateLimitID, state)
 
-Will create or update the state of a debounce. State is assumed as `false` if none is given.
+Will create or update the state of a rate limit. State is assumed as `false` if not provided.
 
 Example: 
 
 ```js
 
-setDebounce('myid', true); // Creates a debounce with true state.
+setState('myid', true); // Creates a rate limit with true state.
 
-setDebounce('myid', false); // Changes the state to false.
+setState('myid', false); // Changes the state to false.
 
 ```
 
 ##
 
-### checkDebounce(id)
+### getState(rateLimitID)
 
-Returns the state of a debounce or `null` if it doesn't exist.
+Returns the state of a rate limit or `null` if it doesn't exist.
 
 Example: 
 
 ```js
 
-setDebounce('myid', true); // Creates a debounce with true state.
+setState('myid', true); // Creates a rate limit with true state.
 
-> checkDebounce('myid'); // Returns true.
+> getState('myid'); // Returns true.
 
 ```
 
 ##
 
-### removeDebounce(id)
+### removeLimit(rateLimitID)
 
-Returns `true` if a debounce was removed or `false` if it does not exist.
+Returns `true` if a rate limit was removed or `false` if it does not exist.
 
 Example: 
 
 ```js
 
-setDebounce('myid', true); // Creates a debounce with true state.
+setState('myid', true); // Creates a rate limit with a true state.
 
-> removeDebounce('myid'); 
+> removeLimit('myid'); 
 
-checkDebounce('myid'); // Returns null.
+getState('myid'); // Returns null.
 ```
