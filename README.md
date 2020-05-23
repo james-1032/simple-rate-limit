@@ -2,7 +2,7 @@
 
 ![MIT Licence](https://img.shields.io/badge/licence-MIT-brightgreen.svg?style=flat) ![0 dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg?style=flat)
 
-Simple rate limiter for JavaScript functions
+Simple rate limiter for JavaScript functions.
 
 ## Usage
 
